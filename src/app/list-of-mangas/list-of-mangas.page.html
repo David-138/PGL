@@ -1,0 +1,34 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Lista de mangas</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-item *ngFor="let m of mangas; let i = index">
+    <ion-label>
+      <h1 class="titulo"  (click)="toggleVisibility(i)">{{m.titulo}}</h1>
+      <h6 [attr.aria-hidden]="!visibility[i]" [class.hidden]="!visibility[i]" [class.visible]="visibility[i]">{{m.sinopsis}}</h6>
+      <h6 [attr.aria-hidden]="!visibility[i]" [class.hidden]="!visibility[i]" [class.visible]="visibility[i]">Revista: {{m.serializacion}}</h6>
+      <h4 [attr.aria-hidden]="!visibility[i]" [class.hidden]="!visibility[i]" [class.visible]="visibility[i]">Géneros:</h4>
+      <ul [attr.aria-hidden]="!visibility[i]" [class.hidden]="!visibility[i]" [class.visible]="visibility[i]">
+        <li *ngFor="let g of m.genre">
+          {{ g.nombre }}
+        </li>
+      </ul>
+      <ion-button [attr.aria-hidden]="!visibility[i]" [class.hidden]="!visibility[i]" [class.visible]="visibility[i]" (click)="gotoListOfReviews(m.id_Manga)">
+        Hacer una reseña
+      </ion-button>
+    </ion-label>
+  </ion-item>
+</ion-content>
+<ion-footer>
+  <ion-toolbar class="CambiarPagina">
+    <ion-button (click)="previousPage()" [disabled]="page === 0"
+      >Anterior</ion-button
+    >
+    <ion-label>Página {{ page + 1 }} de {{ totalPages }}</ion-label>
+    <ion-button (click)="nextPage()" [disabled]="page >= totalPages - 1"
+      >Siguiente</ion-button
+    >
+  </ion-toolbar>
+</ion-footer>
