@@ -44,4 +44,7 @@ export class ListOfMangasPage implements OnInit {
   gotoListOfReviews(id: number){
     this.router.navigate(["/list-of-reviews", id]);
   }
+  gotoHome(){
+    this.router.navigate(["/home"]);
+  }
 }

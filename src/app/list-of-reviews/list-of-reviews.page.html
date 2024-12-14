@@ -1,14 +1,53 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Lista de reviews</ion-title>
+    <ion-title>Reseñas de {{ manga?.titulo }}</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  <ion-item *ngFor="let m of mangas">
-    <ion-label>
-      
-    </ion-label>
+<ion-content *ngIf="manga">
+  <h3>Reseñas:</h3>
+  <ion-list>
+    <ion-item *ngFor="let review of manga.reviews">
+      <ion-label>
+        <h3>{{ review.contenido }}</h3>
+        <h2>Nota: {{ review.nota }}</h2>
+      </ion-label>
+      <ion-button color="danger" (click)="deleteReview(review.id_Review)">
+        Borrar
+      </ion-button>
+      <ion-button color="secondary" (click)="newReview = review">
+        Editar
+      </ion-button>
+    </ion-item>
+  </ion-list>
+  <h3>Añadir Reseña:</h3>
+  <ion-item>
+    <ion-label position="stacked">Contenido</ion-label>
+    <ion-textarea
+      [(ngModel)]="newReview.contenido"
+      placeholder="Escribe tu reseña"
+    ></ion-textarea>
   </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Nota</ion-label>
+    <ion-input
+      type="number"
+      [(ngModel)]="newReview.nota"
+      placeholder="Introduce una nota"
+    ></ion-input>
+  </ion-item>
+  <ion-button (click)="addReview()">
+    Añadir Reseña
+  </ion-button>
+  <ion-button
+    color="secondary"
+    *ngIf="newReview.id_Review"
+    (click)="updateReview(newReview.id_Review)"
+  >
+    Guardar Cambios
+  </ion-button>
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
 </ion-content>
 <ion-footer>
   <ion-toolbar>

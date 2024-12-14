@@ -21,3 +21,23 @@ export interface PagedResponse {
   totalElements: number;
   totalPages: number;
 }
+export interface Review {
+  id_Review: number;
+  nota: number;
+  contenido: string;
+  id_Manga?: number;
+}
+
+export interface Genre {
+  id_Genero: number;
+  nombre: string;
+}
+
+export interface Manga {
+  id_Manga: number;
+  titulo: string;
+  sinopsis: string;
+  serializacion: string;
+  reviews: Review[];
+  genre: Genre[];
+}
